@@ -47,4 +47,49 @@ public class Contact {
     return contacts;
   }
 
+  Contact[] editContact(Contact[] contacts) {
+
+    if (contacts[0] == null) {
+      System.out.print("You have no contacts yet. 'add' one before you edit.\n");
+      return contacts;
+
+    } else {
+      System.out.print("Your contacts are: ");
+      for (Contact c : contacts) {
+        if (c != null) System.out.print(c.fName + ", ");
+        else break;
+      }
+      System.out.println();
+
+      System.out.print("\nEnter a name to edit. mind the case ");
+      String name = sc.nextLine();
+
+      short index = checkContact(contacts, name);
+
+      if (index == -1) System.out.println("we couldnt find " + name + ". try again. ");
+      else {
+        System.out.println("\n* " + name + " is being edited *");
+
+        Contact cc = new Contact();
+        cc.getInputs();
+        contacts[index] = cc;
+
+        System.out.println("contact has been updated.");
+      }
+
+      return contacts;
+    }
+  }
+
+  short checkContact(Contact[] contacts, String name) {
+    short found = -1;
+    for (short i = 0; i < contacts.length; i++) {
+      if (contacts[i] != null && contacts[i].fName.equals(name)) {
+        found = i;
+        break;
+      }
+    }
+
+    return found;
+  }
 }
