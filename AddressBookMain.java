@@ -2,8 +2,8 @@ package com.java.day9;
 
 import java.util.Scanner;
 
-
 public class AddressBookMain {
+
   public static void main(String[] args) {
     System.out.println("--Welcome to Address Book Program--");
 
@@ -12,11 +12,10 @@ public class AddressBookMain {
     Scanner sc = new Scanner(System.in);
 
     while (!choice.equals("quit")) {
-      System.out.print("\n1. add \n2. edit \n3. quit \nEnter your choice: ");
+      System.out.print("\n1. add \n2. edit \n3. delete \n4. show \n5. quit \nEnter your choice: ");
       choice = sc.next();
 
       switch (choice) {
-        
         case "add":
         case "1":
           Contact c = new Contact();
@@ -30,21 +29,33 @@ public class AddressBookMain {
         case "edit":
         case "2":
           c = new Contact();
-          contacts = c.editContact(contacts);
+          contacts = c.showEditDelete(contacts, "edit");
+          break;
+
+        case "delete":
+        case "3":
+          c = new Contact();
+          contacts = c.showEditDelete(contacts, "delete");
+          break;
+
+        case "show":
+        case "4":
+          c = new Contact();
+          contacts = c.showEditDelete(contacts, "show");
           break;
 
         case "quit":
-        case "3":
+        case "5":
           choice = "quit";
           break;
 
         default:
           System.out.println("that didnt match any choice, try again");
           break;
-
       }
     }
-    sc.close();
 
+    sc.close();
   }
+
 }
