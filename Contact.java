@@ -35,4 +35,16 @@ public class Contact {
     phNum = sc.nextLong();
 
   }
+
+  Contact[] addContact(Contact[] contacts, Contact c) {
+    for (int i = 0; i < contacts.length; i++) {
+      if (contacts[i] == null) {
+        contacts[i] = c;
+        break;
+      }
+    }
+    System.out.println("a new contact has been added");
+    return contacts;
+  }
+
 }
