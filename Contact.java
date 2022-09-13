@@ -1,5 +1,7 @@
 package com.java.day9;
 
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Contact {
@@ -36,31 +38,26 @@ public class Contact {
 
   }
 
-  Contact[] addContact(Contact[] contacts, Contact c) {
-    for (int i = 0; i < contacts.length; i++) {
-      if (contacts[i] == null) {
-        contacts[i] = c;
-        break;
-      }
-    }
+  ArrayList<Contact> addContact(ArrayList<Contact> contacts, Contact c) {
+    contacts.add(c);
     System.out.println("a new contact has been added");
     return contacts;
   }
 
-  Contact[] editContact(Contact[] contacts, short index) {
+  ArrayList<Contact> editContact(ArrayList<Contact> contacts, short index) {
 
     Contact cc = new Contact();
     cc.getInputs();
-    contacts[index] = cc;
+    contacts.set(index, cc);
     System.out.println("contact has been updated.");
 
     return contacts;
   }
 
-  short getIndex(Contact[] contacts, String name) {
+  short getIndex(ArrayList<Contact> contacts, String name) {
     short found = -1;
-    for (short i = 0; i < contacts.length; i++) {
-      if (contacts[i] != null && contacts[i].fName.equals(name)) {
+    for (short i = 0; i < contacts.size(); i++) {
+      if (contacts.get(i).fName.toLowerCase().equals(name.toLowerCase())) {
         found = i;
         break;
       }
@@ -69,19 +66,14 @@ public class Contact {
     return found;
   }
 
-  Contact[] deleteContact(Contact[] contacts, short index) {
-
-    for (short i = index; i < contacts.length; i++) {
-      contacts[i] = contacts[i + 1];
-      if (contacts[i + 1] == null) break;
-    }
-
+  ArrayList<Contact> deleteContact(ArrayList<Contact> contacts, short index) {
+    contacts.remove(index);
     return contacts;
 
   }
 
-  Contact[] showEditDelete(Contact[] contacts, String str) {
-    if (contacts[0] == null) {
+  ArrayList<Contact> showEditDelete(ArrayList<Contact> contacts, String str) {
+    if (contacts.size() == 0) {
       System.out.print("You have no contacts yet. 'add' one before you " + str + ".\n");
       return contacts;
 
@@ -93,7 +85,7 @@ public class Contact {
       }
       System.out.println();
 
-      System.out.print("\nEnter a name to " + str + ". mind the case ");
+      System.out.print("\nEnter a name to " + str + ". ");
       String name = sc.nextLine();
 
       short index = getIndex(contacts, name);
@@ -106,17 +98,12 @@ public class Contact {
             System.out.println("\n* " + name + " is being edited *");
             contacts = editContact(contacts, index);
             break;
-          
           case "delete":
             contacts = deleteContact(contacts, index);
             System.out.println("contact " + name + " has been deleted.");
             break;
-         
           case "show":
             showDetails(contacts, index);
-            break;
-
-          default:
             break;
         }
       }
@@ -126,10 +113,11 @@ public class Contact {
 
   }
 
-  void showDetails(Contact[] c, short i) {
-
+  void showDetails(ArrayList<Contact> c, short i) {
     System.out.println("Contact Details ");
-    System.out.print("Name: " + c[i].fName + " " + c[i].lName + "\nAddress: " + c[i].address + "\nCity: " + c[i].city + "\t\tState: "
-      + c[i].state + "\t\tZip: " + c[i].zip + "\nEmail: " + c[i].email + "\t\tPhone number: " + c[i].phNum + "\n");
+    System.out.print("Name: " + c.get(i).fName + " " + c.get(i).lName + "\nAddress: " + c.get(i).address + "\nCity: "
+      + c.get(i).city + "\t\tState: " + c.get(i).state + "\t\tZip: " + c.get(i).zip + "\nEmail: " + c.get(i).email
+      + "\t\tPhone number: " + c.get(i).phNum + "\n");
   }
+
 }
