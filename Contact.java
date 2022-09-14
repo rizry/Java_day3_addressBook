@@ -1,5 +1,4 @@
-package com.java.day9;
-
+package com.java.day10.addressbook;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -105,6 +104,7 @@ public class Contact {
           case "show":
             showDetails(contacts, index);
             break;
+
         }
       }
 
@@ -119,5 +119,4 @@ public class Contact {
       + c.get(i).city + "\t\tState: " + c.get(i).state + "\t\tZip: " + c.get(i).zip + "\nEmail: " + c.get(i).email
       + "\t\tPhone number: " + c.get(i).phNum + "\n");
   }
-
 }
